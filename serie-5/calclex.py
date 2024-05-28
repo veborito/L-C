@@ -7,6 +7,7 @@
 import ply.lex as lex
 import tokrules
 
+tokens = tokrules.tokens
 class MyLexer():
     # Build the lexer
     def build(self, **kwargs):

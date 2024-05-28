@@ -44,7 +44,7 @@ parser = yacc.yacc()
 
 while True:
     try:
-        s = raw_input('calc > ')
+        s = input('calc > ')
     except EOFError:
         break
     if not s: continue
