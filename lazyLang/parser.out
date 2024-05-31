@@ -1,0 +1,525 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ASSIGN
+    STRING
+
+Grammar
+
+Rule 0     S' -> statement
+Rule 1     statement -> VAR EQUAL expression
+Rule 2     statement -> PRINT expression
+Rule 3     statement -> RANGE INTEGER COMMA INTEGER
+Rule 4     statement -> SQRT expression
+Rule 5     statement -> expression
+Rule 6     expression -> expression PLUS term
+Rule 7     expression -> expression MINUS term
+Rule 8     expression -> term
+Rule 9     term -> term TIMES factor
+Rule 10    term -> term DIVIDE factor
+Rule 11    term -> term MODULO factor
+Rule 12    term -> factor
+Rule 13    factor -> INTEGER
+Rule 14    factor -> FLOAT
+Rule 15    factor -> LPAREN expression RPAREN
+Rule 16    factor -> VAR
+
+Terminals, with rules where they appear
+
+ASSIGN               : 
+COMMA                : 3
+DIVIDE               : 10
+EQUAL                : 1
+FLOAT                : 14
+INTEGER              : 3 3 13
+LPAREN               : 15
+MINUS                : 7
+MODULO               : 11
+PLUS                 : 6
+PRINT                : 2
+RANGE                : 3
+RPAREN               : 15
+SQRT                 : 4
+STRING               : 
+TIMES                : 9
+VAR                  : 1 16
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 1 2 4 5 6 7 15
+factor               : 9 10 11 12
+statement            : 0
+term                 : 6 7 8 9 10 11
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . VAR EQUAL expression
+    (2) statement -> . PRINT expression
+    (3) statement -> . RANGE INTEGER COMMA INTEGER
+    (4) statement -> . SQRT expression
+    (5) statement -> . expression
+    (6) expression -> . expression PLUS term
+    (7) expression -> . expression MINUS term
+    (8) expression -> . term
+    (9) term -> . term TIMES factor
+    (10) term -> . term DIVIDE factor
+    (11) term -> . term MODULO factor
+    (12) term -> . factor
+    (13) factor -> . INTEGER
+    (14) factor -> . FLOAT
+    (15) factor -> . LPAREN expression RPAREN
+    (16) factor -> . VAR
+
+    VAR             shift and go to state 2
+    PRINT           shift and go to state 4
+    RANGE           shift and go to state 5
+    SQRT            shift and go to state 7
+    INTEGER         shift and go to state 6
+    FLOAT           shift and go to state 10
+    LPAREN          shift and go to state 11
+
+    statement                      shift and go to state 1
+    expression                     shift and go to state 3
+    term                           shift and go to state 8
+    factor                         shift and go to state 9
+
+state 1
+
+    (0) S' -> statement .
+
+
+
+state 2
+
+    (1) statement -> VAR . EQUAL expression
+    (16) factor -> VAR .
+
+    EQUAL           shift and go to state 12
+    TIMES           reduce using rule 16 (factor -> VAR .)
+    DIVIDE          reduce using rule 16 (factor -> VAR .)
+    MODULO          reduce using rule 16 (factor -> VAR .)
+    PLUS            reduce using rule 16 (factor -> VAR .)
+    MINUS           reduce using rule 16 (factor -> VAR .)
+    $end            reduce using rule 16 (factor -> VAR .)
+
+
+state 3
+
+    (5) statement -> expression .
+    (6) expression -> expression . PLUS term
+    (7) expression -> expression . MINUS term
+
+    $end            reduce using rule 5 (statement -> expression .)
+    PLUS            shift and go to state 13
+    MINUS           shift and go to state 14
+
+
+state 4
+
+    (2) statement -> PRINT . expression
+    (6) expression -> . expression PLUS term
+    (7) expression -> . expression MINUS term
+    (8) expression -> . term
+    (9) term -> . term TIMES factor
+    (10) term -> . term DIVIDE factor
+    (11) term -> . term MODULO factor
+    (12) term -> . factor
+    (13) factor -> . INTEGER
+    (14) factor -> . FLOAT
+    (15) factor -> . LPAREN expression RPAREN
+    (16) factor -> . VAR
+
+    INTEGER         shift and go to state 6
+    FLOAT           shift and go to state 10
+    LPAREN          shift and go to state 11
+    VAR             shift and go to state 16
+
+    expression                     shift and go to state 15
+    term                           shift and go to state 8
+    factor                         shift and go to state 9
+
+state 5
+
+    (3) statement -> RANGE . INTEGER COMMA INTEGER
+
+    INTEGER         shift and go to state 17
+
+
+state 6
+
+    (13) factor -> INTEGER .
+
+    TIMES           reduce using rule 13 (factor -> INTEGER .)
+    DIVIDE          reduce using rule 13 (factor -> INTEGER .)
+    MODULO          reduce using rule 13 (factor -> INTEGER .)
+    PLUS            reduce using rule 13 (factor -> INTEGER .)
+    MINUS           reduce using rule 13 (factor -> INTEGER .)
+    $end            reduce using rule 13 (factor -> INTEGER .)
+    RPAREN          reduce using rule 13 (factor -> INTEGER .)
+
+
+state 7
+
+    (4) statement -> SQRT . expression
+    (6) expression -> . expression PLUS term
+    (7) expression -> . expression MINUS term
+    (8) expression -> . term
+    (9) term -> . term TIMES factor
+    (10) term -> . term DIVIDE factor
+    (11) term -> . term MODULO factor
+    (12) term -> . factor
+    (13) factor -> . INTEGER
+    (14) factor -> . FLOAT
+    (15) factor -> . LPAREN expression RPAREN
+    (16) factor -> . VAR
+
+    INTEGER         shift and go to state 6
+    FLOAT           shift and go to state 10
+    LPAREN          shift and go to state 11
+    VAR             shift and go to state 16
+
+    expression                     shift and go to state 18
+    term                           shift and go to state 8
+    factor                         shift and go to state 9
+
+state 8
+
+    (8) expression -> term .
+    (9) term -> term . TIMES factor
+    (10) term -> term . DIVIDE factor
+    (11) term -> term . MODULO factor
+
+    PLUS            reduce using rule 8 (expression -> term .)
+    MINUS           reduce using rule 8 (expression -> term .)
+    $end            reduce using rule 8 (expression -> term .)
+    RPAREN          reduce using rule 8 (expression -> term .)
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    MODULO          shift and go to state 21
+
+
+state 9
+
+    (12) term -> factor .
+
+    TIMES           reduce using rule 12 (term -> factor .)
+    DIVIDE          reduce using rule 12 (term -> factor .)
+    MODULO          reduce using rule 12 (term -> factor .)
+    PLUS            reduce using rule 12 (term -> factor .)
+    MINUS           reduce using rule 12 (term -> factor .)
+    $end            reduce using rule 12 (term -> factor .)
+    RPAREN          reduce using rule 12 (term -> factor .)
+
+
+state 10
+
+    (14) factor -> FLOAT .
+
+    TIMES           reduce using rule 14 (factor -> FLOAT .)
+    DIVIDE          reduce using rule 14 (factor -> FLOAT .)
+    MODULO          reduce using rule 14 (factor -> FLOAT .)
+    PLUS            reduce using rule 14 (factor -> FLOAT .)
+    MINUS           reduce using rule 14 (factor -> FLOAT .)
+    $end            reduce using rule 14 (factor -> FLOAT .)
+    RPAREN          reduce using rule 14 (factor -> FLOAT .)
+
+
+state 11
+
+    (15) factor -> LPAREN . expression RPAREN
+    (6) expression -> . expression PLUS term
+    (7) expression -> . expression MINUS term
+    (8) expression -> . term
+    (9) term -> . term TIMES factor
+    (10) term -> . term DIVIDE factor
+    (11) term -> . term MODULO factor
+    (12) term -> . factor
+    (13) factor -> . INTEGER
+    (14) factor -> . FLOAT
+    (15) factor -> . LPAREN expression RPAREN
+    (16) factor -> . VAR
+
+    INTEGER         shift and go to state 6
+    FLOAT           shift and go to state 10
+    LPAREN          shift and go to state 11
+    VAR             shift and go to state 16
+
+    expression                     shift and go to state 22
+    term                           shift and go to state 8
+    factor                         shift and go to state 9
+
+state 12
+
+    (1) statement -> VAR EQUAL . expression
+    (6) expression -> . expression PLUS term
+    (7) expression -> . expression MINUS term
+    (8) expression -> . term
+    (9) term -> . term TIMES factor
+    (10) term -> . term DIVIDE factor
+    (11) term -> . term MODULO factor
+    (12) term -> . factor
+    (13) factor -> . INTEGER
+    (14) factor -> . FLOAT
+    (15) factor -> . LPAREN expression RPAREN
+    (16) factor -> . VAR
+
+    INTEGER         shift and go to state 6
+    FLOAT           shift and go to state 10
+    LPAREN          shift and go to state 11
+    VAR             shift and go to state 16
+
+    expression                     shift and go to state 23
+    term                           shift and go to state 8
+    factor                         shift and go to state 9
+
+state 13
+
+    (6) expression -> expression PLUS . term
+    (9) term -> . term TIMES factor
+    (10) term -> . term DIVIDE factor
+    (11) term -> . term MODULO factor
+    (12) term -> . factor
+    (13) factor -> . INTEGER
+    (14) factor -> . FLOAT
+    (15) factor -> . LPAREN expression RPAREN
+    (16) factor -> . VAR
+
+    INTEGER         shift and go to state 6
+    FLOAT           shift and go to state 10
+    LPAREN          shift and go to state 11
+    VAR             shift and go to state 16
+
+    term                           shift and go to state 24
+    factor                         shift and go to state 9
+
+state 14
+
+    (7) expression -> expression MINUS . term
+    (9) term -> . term TIMES factor
+    (10) term -> . term DIVIDE factor
+    (11) term -> . term MODULO factor
+    (12) term -> . factor
+    (13) factor -> . INTEGER
+    (14) factor -> . FLOAT
+    (15) factor -> . LPAREN expression RPAREN
+    (16) factor -> . VAR
+
+    INTEGER         shift and go to state 6
+    FLOAT           shift and go to state 10
+    LPAREN          shift and go to state 11
+    VAR             shift and go to state 16
+
+    term                           shift and go to state 25
+    factor                         shift and go to state 9
+
+state 15
+
+    (2) statement -> PRINT expression .
+    (6) expression -> expression . PLUS term
+    (7) expression -> expression . MINUS term
+
+    $end            reduce using rule 2 (statement -> PRINT expression .)
+    PLUS            shift and go to state 13
+    MINUS           shift and go to state 14
+
+
+state 16
+
+    (16) factor -> VAR .
+
+    TIMES           reduce using rule 16 (factor -> VAR .)
+    DIVIDE          reduce using rule 16 (factor -> VAR .)
+    MODULO          reduce using rule 16 (factor -> VAR .)
+    PLUS            reduce using rule 16 (factor -> VAR .)
+    MINUS           reduce using rule 16 (factor -> VAR .)
+    $end            reduce using rule 16 (factor -> VAR .)
+    RPAREN          reduce using rule 16 (factor -> VAR .)
+
+
+state 17
+
+    (3) statement -> RANGE INTEGER . COMMA INTEGER
+
+    COMMA           shift and go to state 26
+
+
+state 18
+
+    (4) statement -> SQRT expression .
+    (6) expression -> expression . PLUS term
+    (7) expression -> expression . MINUS term
+
+    $end            reduce using rule 4 (statement -> SQRT expression .)
+    PLUS            shift and go to state 13
+    MINUS           shift and go to state 14
+
+
+state 19
+
+    (9) term -> term TIMES . factor
+    (13) factor -> . INTEGER
+    (14) factor -> . FLOAT
+    (15) factor -> . LPAREN expression RPAREN
+    (16) factor -> . VAR
+
+    INTEGER         shift and go to state 6
+    FLOAT           shift and go to state 10
+    LPAREN          shift and go to state 11
+    VAR             shift and go to state 16
+
+    factor                         shift and go to state 27
+
+state 20
+
+    (10) term -> term DIVIDE . factor
+    (13) factor -> . INTEGER
+    (14) factor -> . FLOAT
+    (15) factor -> . LPAREN expression RPAREN
+    (16) factor -> . VAR
+
+    INTEGER         shift and go to state 6
+    FLOAT           shift and go to state 10
+    LPAREN          shift and go to state 11
+    VAR             shift and go to state 16
+
+    factor                         shift and go to state 28
+
+state 21
+
+    (11) term -> term MODULO . factor
+    (13) factor -> . INTEGER
+    (14) factor -> . FLOAT
+    (15) factor -> . LPAREN expression RPAREN
+    (16) factor -> . VAR
+
+    INTEGER         shift and go to state 6
+    FLOAT           shift and go to state 10
+    LPAREN          shift and go to state 11
+    VAR             shift and go to state 16
+
+    factor                         shift and go to state 29
+
+state 22
+
+    (15) factor -> LPAREN expression . RPAREN
+    (6) expression -> expression . PLUS term
+    (7) expression -> expression . MINUS term
+
+    RPAREN          shift and go to state 30
+    PLUS            shift and go to state 13
+    MINUS           shift and go to state 14
+
+
+state 23
+
+    (1) statement -> VAR EQUAL expression .
+    (6) expression -> expression . PLUS term
+    (7) expression -> expression . MINUS term
+
+    $end            reduce using rule 1 (statement -> VAR EQUAL expression .)
+    PLUS            shift and go to state 13
+    MINUS           shift and go to state 14
+
+
+state 24
+
+    (6) expression -> expression PLUS term .
+    (9) term -> term . TIMES factor
+    (10) term -> term . DIVIDE factor
+    (11) term -> term . MODULO factor
+
+    PLUS            reduce using rule 6 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 6 (expression -> expression PLUS term .)
+    $end            reduce using rule 6 (expression -> expression PLUS term .)
+    RPAREN          reduce using rule 6 (expression -> expression PLUS term .)
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    MODULO          shift and go to state 21
+
+
+state 25
+
+    (7) expression -> expression MINUS term .
+    (9) term -> term . TIMES factor
+    (10) term -> term . DIVIDE factor
+    (11) term -> term . MODULO factor
+
+    PLUS            reduce using rule 7 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 7 (expression -> expression MINUS term .)
+    $end            reduce using rule 7 (expression -> expression MINUS term .)
+    RPAREN          reduce using rule 7 (expression -> expression MINUS term .)
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    MODULO          shift and go to state 21
+
+
+state 26
+
+    (3) statement -> RANGE INTEGER COMMA . INTEGER
+
+    INTEGER         shift and go to state 31
+
+
+state 27
+
+    (9) term -> term TIMES factor .
+
+    TIMES           reduce using rule 9 (term -> term TIMES factor .)
+    DIVIDE          reduce using rule 9 (term -> term TIMES factor .)
+    MODULO          reduce using rule 9 (term -> term TIMES factor .)
+    PLUS            reduce using rule 9 (term -> term TIMES factor .)
+    MINUS           reduce using rule 9 (term -> term TIMES factor .)
+    $end            reduce using rule 9 (term -> term TIMES factor .)
+    RPAREN          reduce using rule 9 (term -> term TIMES factor .)
+
+
+state 28
+
+    (10) term -> term DIVIDE factor .
+
+    TIMES           reduce using rule 10 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 10 (term -> term DIVIDE factor .)
+    MODULO          reduce using rule 10 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 10 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 10 (term -> term DIVIDE factor .)
+    $end            reduce using rule 10 (term -> term DIVIDE factor .)
+    RPAREN          reduce using rule 10 (term -> term DIVIDE factor .)
+
+
+state 29
+
+    (11) term -> term MODULO factor .
+
+    TIMES           reduce using rule 11 (term -> term MODULO factor .)
+    DIVIDE          reduce using rule 11 (term -> term MODULO factor .)
+    MODULO          reduce using rule 11 (term -> term MODULO factor .)
+    PLUS            reduce using rule 11 (term -> term MODULO factor .)
+    MINUS           reduce using rule 11 (term -> term MODULO factor .)
+    $end            reduce using rule 11 (term -> term MODULO factor .)
+    RPAREN          reduce using rule 11 (term -> term MODULO factor .)
+
+
+state 30
+
+    (15) factor -> LPAREN expression RPAREN .
+
+    TIMES           reduce using rule 15 (factor -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 15 (factor -> LPAREN expression RPAREN .)
+    MODULO          reduce using rule 15 (factor -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 15 (factor -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 15 (factor -> LPAREN expression RPAREN .)
+    $end            reduce using rule 15 (factor -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 15 (factor -> LPAREN expression RPAREN .)
+
+
+state 31
+
+    (3) statement -> RANGE INTEGER COMMA INTEGER .
+
+    $end            reduce using rule 3 (statement -> RANGE INTEGER COMMA INTEGER .)
+
