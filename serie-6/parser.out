@@ -1,0 +1,303 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> statement
+Rule 1     statement -> VAR ASSIGN expression
+Rule 2     statement -> PRINT expression
+Rule 3     statement -> expression
+Rule 4     expression -> expression PLUS term
+Rule 5     expression -> expression MINUS term
+Rule 6     expression -> term
+Rule 7     term -> term TIMES NUMBER
+Rule 8     term -> term DIVIDE NUMBER
+Rule 9     term -> term MODULO NUMBER
+Rule 10    term -> NUMBER
+Rule 11    term -> VAR
+
+Terminals, with rules where they appear
+
+ASSIGN               : 1
+DIVIDE               : 8
+MINUS                : 5
+MODULO               : 9
+NUMBER               : 7 8 9 10
+PLUS                 : 4
+PRINT                : 2
+TIMES                : 7
+VAR                  : 1 11
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 1 2 3 4 5
+statement            : 0
+term                 : 4 5 6 7 8 9
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . VAR ASSIGN expression
+    (2) statement -> . PRINT expression
+    (3) statement -> . expression
+    (4) expression -> . expression PLUS term
+    (5) expression -> . expression MINUS term
+    (6) expression -> . term
+    (7) term -> . term TIMES NUMBER
+    (8) term -> . term DIVIDE NUMBER
+    (9) term -> . term MODULO NUMBER
+    (10) term -> . NUMBER
+    (11) term -> . VAR
+
+    VAR             shift and go to state 2
+    PRINT           shift and go to state 4
+    NUMBER          shift and go to state 6
+
+    statement                      shift and go to state 1
+    expression                     shift and go to state 3
+    term                           shift and go to state 5
+
+state 1
+
+    (0) S' -> statement .
+
+
+
+state 2
+
+    (1) statement -> VAR . ASSIGN expression
+    (11) term -> VAR .
+
+    ASSIGN          shift and go to state 7
+    TIMES           reduce using rule 11 (term -> VAR .)
+    DIVIDE          reduce using rule 11 (term -> VAR .)
+    MODULO          reduce using rule 11 (term -> VAR .)
+    PLUS            reduce using rule 11 (term -> VAR .)
+    MINUS           reduce using rule 11 (term -> VAR .)
+    $end            reduce using rule 11 (term -> VAR .)
+
+
+state 3
+
+    (3) statement -> expression .
+    (4) expression -> expression . PLUS term
+    (5) expression -> expression . MINUS term
+
+    $end            reduce using rule 3 (statement -> expression .)
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+
+
+state 4
+
+    (2) statement -> PRINT . expression
+    (4) expression -> . expression PLUS term
+    (5) expression -> . expression MINUS term
+    (6) expression -> . term
+    (7) term -> . term TIMES NUMBER
+    (8) term -> . term DIVIDE NUMBER
+    (9) term -> . term MODULO NUMBER
+    (10) term -> . NUMBER
+    (11) term -> . VAR
+
+    NUMBER          shift and go to state 6
+    VAR             shift and go to state 11
+
+    expression                     shift and go to state 10
+    term                           shift and go to state 5
+
+state 5
+
+    (6) expression -> term .
+    (7) term -> term . TIMES NUMBER
+    (8) term -> term . DIVIDE NUMBER
+    (9) term -> term . MODULO NUMBER
+
+    PLUS            reduce using rule 6 (expression -> term .)
+    MINUS           reduce using rule 6 (expression -> term .)
+    $end            reduce using rule 6 (expression -> term .)
+    TIMES           shift and go to state 12
+    DIVIDE          shift and go to state 13
+    MODULO          shift and go to state 14
+
+
+state 6
+
+    (10) term -> NUMBER .
+
+    TIMES           reduce using rule 10 (term -> NUMBER .)
+    DIVIDE          reduce using rule 10 (term -> NUMBER .)
+    MODULO          reduce using rule 10 (term -> NUMBER .)
+    PLUS            reduce using rule 10 (term -> NUMBER .)
+    MINUS           reduce using rule 10 (term -> NUMBER .)
+    $end            reduce using rule 10 (term -> NUMBER .)
+
+
+state 7
+
+    (1) statement -> VAR ASSIGN . expression
+    (4) expression -> . expression PLUS term
+    (5) expression -> . expression MINUS term
+    (6) expression -> . term
+    (7) term -> . term TIMES NUMBER
+    (8) term -> . term DIVIDE NUMBER
+    (9) term -> . term MODULO NUMBER
+    (10) term -> . NUMBER
+    (11) term -> . VAR
+
+    NUMBER          shift and go to state 6
+    VAR             shift and go to state 11
+
+    expression                     shift and go to state 15
+    term                           shift and go to state 5
+
+state 8
+
+    (4) expression -> expression PLUS . term
+    (7) term -> . term TIMES NUMBER
+    (8) term -> . term DIVIDE NUMBER
+    (9) term -> . term MODULO NUMBER
+    (10) term -> . NUMBER
+    (11) term -> . VAR
+
+    NUMBER          shift and go to state 6
+    VAR             shift and go to state 11
+
+    term                           shift and go to state 16
+
+state 9
+
+    (5) expression -> expression MINUS . term
+    (7) term -> . term TIMES NUMBER
+    (8) term -> . term DIVIDE NUMBER
+    (9) term -> . term MODULO NUMBER
+    (10) term -> . NUMBER
+    (11) term -> . VAR
+
+    NUMBER          shift and go to state 6
+    VAR             shift and go to state 11
+
+    term                           shift and go to state 17
+
+state 10
+
+    (2) statement -> PRINT expression .
+    (4) expression -> expression . PLUS term
+    (5) expression -> expression . MINUS term
+
+    $end            reduce using rule 2 (statement -> PRINT expression .)
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+
+
+state 11
+
+    (11) term -> VAR .
+
+    TIMES           reduce using rule 11 (term -> VAR .)
+    DIVIDE          reduce using rule 11 (term -> VAR .)
+    MODULO          reduce using rule 11 (term -> VAR .)
+    PLUS            reduce using rule 11 (term -> VAR .)
+    MINUS           reduce using rule 11 (term -> VAR .)
+    $end            reduce using rule 11 (term -> VAR .)
+
+
+state 12
+
+    (7) term -> term TIMES . NUMBER
+
+    NUMBER          shift and go to state 18
+
+
+state 13
+
+    (8) term -> term DIVIDE . NUMBER
+
+    NUMBER          shift and go to state 19
+
+
+state 14
+
+    (9) term -> term MODULO . NUMBER
+
+    NUMBER          shift and go to state 20
+
+
+state 15
+
+    (1) statement -> VAR ASSIGN expression .
+    (4) expression -> expression . PLUS term
+    (5) expression -> expression . MINUS term
+
+    $end            reduce using rule 1 (statement -> VAR ASSIGN expression .)
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+
+
+state 16
+
+    (4) expression -> expression PLUS term .
+    (7) term -> term . TIMES NUMBER
+    (8) term -> term . DIVIDE NUMBER
+    (9) term -> term . MODULO NUMBER
+
+    PLUS            reduce using rule 4 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 4 (expression -> expression PLUS term .)
+    $end            reduce using rule 4 (expression -> expression PLUS term .)
+    TIMES           shift and go to state 12
+    DIVIDE          shift and go to state 13
+    MODULO          shift and go to state 14
+
+
+state 17
+
+    (5) expression -> expression MINUS term .
+    (7) term -> term . TIMES NUMBER
+    (8) term -> term . DIVIDE NUMBER
+    (9) term -> term . MODULO NUMBER
+
+    PLUS            reduce using rule 5 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 5 (expression -> expression MINUS term .)
+    $end            reduce using rule 5 (expression -> expression MINUS term .)
+    TIMES           shift and go to state 12
+    DIVIDE          shift and go to state 13
+    MODULO          shift and go to state 14
+
+
+state 18
+
+    (7) term -> term TIMES NUMBER .
+
+    TIMES           reduce using rule 7 (term -> term TIMES NUMBER .)
+    DIVIDE          reduce using rule 7 (term -> term TIMES NUMBER .)
+    MODULO          reduce using rule 7 (term -> term TIMES NUMBER .)
+    PLUS            reduce using rule 7 (term -> term TIMES NUMBER .)
+    MINUS           reduce using rule 7 (term -> term TIMES NUMBER .)
+    $end            reduce using rule 7 (term -> term TIMES NUMBER .)
+
+
+state 19
+
+    (8) term -> term DIVIDE NUMBER .
+
+    TIMES           reduce using rule 8 (term -> term DIVIDE NUMBER .)
+    DIVIDE          reduce using rule 8 (term -> term DIVIDE NUMBER .)
+    MODULO          reduce using rule 8 (term -> term DIVIDE NUMBER .)
+    PLUS            reduce using rule 8 (term -> term DIVIDE NUMBER .)
+    MINUS           reduce using rule 8 (term -> term DIVIDE NUMBER .)
+    $end            reduce using rule 8 (term -> term DIVIDE NUMBER .)
+
+
+state 20
+
+    (9) term -> term MODULO NUMBER .
+
+    TIMES           reduce using rule 9 (term -> term MODULO NUMBER .)
+    DIVIDE          reduce using rule 9 (term -> term MODULO NUMBER .)
+    MODULO          reduce using rule 9 (term -> term MODULO NUMBER .)
+    PLUS            reduce using rule 9 (term -> term MODULO NUMBER .)
+    MINUS           reduce using rule 9 (term -> term MODULO NUMBER .)
+    $end            reduce using rule 9 (term -> term MODULO NUMBER .)
+
